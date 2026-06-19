@@ -1,7 +1,7 @@
 package com.topjohnwu.magisk.ui.deny
 
 import android.annotation.SuppressLint
-import android.content.pm.PackageManager.MATCH_UNINSTALLED_PACKAGES
+import android.content.pm.PackageManager
 import androidx.databinding.Bindable
 import androidx.lifecycle.viewModelScope
 import com.topjohnwu.magisk.BR
@@ -15,6 +15,7 @@ import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.toCollection
 import kotlinx.coroutines.withContext
 
@@ -54,14 +55,25 @@ class DenyListViewModel : AsyncLoadViewModel() {
             val pm = AppContext.packageManager
             val denyList = Shell.cmd("magisk magiskhide ls").exec().out
                 .map { CmdlineListItem(it) }
-            val apps = pm.getInstalledApplications(MATCH_UNINSTALLED_PACKAGES).run {
-                asFlow()
-                    .filter { AppContext.packageName != it.packageName }
-                    .concurrentMap { AppProcessInfo(it, pm, denyList) }
-                    .filter { it.processes.isNotEmpty() }
-                    .concurrentMap { DenyListRvItem(it) }
-                    .toCollection(ArrayList(size))
-            }
+
+            // Use su to list packages, bypassing Android 11+ visibility restrictions
+            val packages = Shell.cmd("pm list packages --user 0").exec().out
+                .map { it.removePrefix("package:") }
+                .filter { it != AppContext.packageName }
+
+            val apps = packages.asFlow()
+                .mapNotNull { pkg ->
+                    try {
+                        pm.getApplicationInfo(pkg, PackageManager.GET_META_DATA)
+                    } catch (_: PackageManager.NameNotFoundException) {
+                        null
+                    }
+                }
+                .concurrentMap { AppProcessInfo(it, pm, denyList) }
+                .filter { it.processes.isNotEmpty() }
+                .concurrentMap { DenyListRvItem(it) }
+                .toCollection(ArrayList(packages.size))
+
             apps.sort()
             apps
         }
