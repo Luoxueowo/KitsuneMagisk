@@ -76,7 +76,7 @@ jobs:
             - `app-release.apk` — release build
             - `app-debug.apk` — debug build (verbose logging)
 
-            Built-in Zygisk is removed for security (commit 2ef8f00); use ReZygisk or NeoZygisk.
+            Built-in Zygisk support restored from LSPlt.
           files: |
             out/app-release.apk
             out/app-debug.apk
