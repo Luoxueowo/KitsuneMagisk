@@ -92,7 +92,7 @@ sealed class DeveloperItem : Dev {
 
     object Luoxue : DeveloperItem(), LuoxueImpl {
         override val items =
-            listOf(
+            listOf<IconLink>(
                 object : IconLink.Github.User(), LuoxueImpl {}
             )
     }
