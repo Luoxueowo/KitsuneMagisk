@@ -59,12 +59,12 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := init-ld
 LOCAL_SRC_FILES := init/preload.c
 LOCAL_STRIP_MODE := --strip-all
-# ondk r27.1 lld segfaults (0xC0000005) doing LTO codegen for this aarch64 shared
-# object ONLY on a Windows build host. LTO is a no-op for a single-file lib, so we
-# disable it on Windows only; Linux/CI keeps the original (-flto) flags for fidelity.
+# ondk r27.1 lld segfaults during LTO codegen for this shared object on Windows.
+# LTO is a no-op for a single-file lib, so we strip the global -flto from both
+# APP_CFLAGS and APP_LDFLAGS on Windows; Linux/CI keeps the original flags.
 ifeq ($(OS),Windows_NT)
-LOCAL_CFLAGS := -fno-lto
-LOCAL_LDFLAGS := -fno-lto
+LOCAL_CFLAGS := $(filter-out -flto,$(APP_CFLAGS))
+LOCAL_LDFLAGS := $(filter-out -flto,$(APP_LDFLAGS))
 endif
 include $(BUILD_SHARED_LIBRARY)
 
