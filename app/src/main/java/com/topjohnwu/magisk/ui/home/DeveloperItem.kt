@@ -32,6 +32,10 @@ private interface HuskyImpl : Dev {
     override val name get() = "HuskyDG"
 }
 
+private interface LuoxueImpl : Dev {
+    override val name get() = "Luoxueowo"
+}
+
 sealed class DeveloperItem : Dev {
 
     abstract val items: List<IconLink>
@@ -83,6 +87,13 @@ sealed class DeveloperItem : Dev {
             listOf<IconLink>(
                 object : IconLink.Github.User(), HuskyImpl {},
                 object : IconLink.PayPal(), HuskyImpl {}
+            )
+    }
+
+    object Luoxue : DeveloperItem(), LuoxueImpl {
+        override val items =
+            listOf(
+                object : IconLink.Github.User(), LuoxueImpl {}
             )
     }
 }
