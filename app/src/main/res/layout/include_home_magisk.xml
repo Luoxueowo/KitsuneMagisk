@@ -152,7 +152,7 @@
 
                             <TextView
                                 style="@style/W.Home.ItemContent"
-                                android:text="Ramdisk" />
+                                android:text="@string/ramdisk" />
 
                             <TextView
                                 style="@style/W.Home.ItemContent.Right"

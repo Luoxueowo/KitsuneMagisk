@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:onClick="@{() -> viewModel.onTestPressed()}"
-                android:text="TEST"
+                android:text="@string/test"
                 android:textAllCaps="false"
                 tools:visibility="gone" />
 

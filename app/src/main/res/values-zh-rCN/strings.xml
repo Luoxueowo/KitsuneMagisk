@@ -140,6 +140,10 @@
     <string name="settings_update_beta">测试版</string>
     <string name="settings_update_custom">自定义通道</string>
     <string name="settings_update_custom_msg">自定义通道网址</string>
+    <string name="settings_update_canary">金丝雀版</string>
+    <string name="settings_update_debug">调试版</string>
+    <string name="ramdisk">Ramdisk</string>
+    <string name="test">测试</string>
     <string name="settings_zygisk_summary">在 Zygote 中运行 Magisk</string>
     <string name="settings_denylist_title">遵守排除列表</string>
     <string name="settings_denylist_summary">Magisk 不会修改列表中的进程</string>
@@ -246,6 +250,11 @@
     <string name="app_not_found">找不到可处理此操作的应用</string>
     <string name="reboot_apply_change">重启后生效</string>
     <string name="restore_app_confirmation">即将把隐藏的 Magisk 应用恢复回原始应用，是否继续？</string>
+    <string name="module_action">操作</string>
+    <string name="close">关闭</string>
+    <string name="running">运行中...</string>
+    <string name="done_action">已完成 %1$s 的操作</string>
+    <string name="su_biometric">验证模式</string>
 
     <string name="direct_install_system">直接安装（直接修改/system）</string>
     <string name="settings_hidelist_config_title">配置 MagiskHide</string>
