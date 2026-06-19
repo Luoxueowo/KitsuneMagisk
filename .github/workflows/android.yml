@@ -91,7 +91,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        api: [23, 29, 35]
+        api: [29, 35]
 
     steps:
       - name: Check out

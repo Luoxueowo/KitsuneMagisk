@@ -4,7 +4,7 @@ emu="$ANDROID_SDK_ROOT/emulator/emulator"
 avd="$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/avdmanager"
 sdk="$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager"
 emu_args_base='-no-window -no-audio -no-boot-anim -gpu swiftshader_indirect -read-only -no-snapshot -show-kernel -memory $memory'
-lsposed_url='https://github.com/JingMatrix/LSPosed/releases/download/v1.10.1/LSPosed-v1.10.1-7115-zygisk-release.zip'
+lsposed_url='https://github.com/JingMatrix/Vector/releases/download/v1.11.0/LSPosed-v1.11.0-7209-zygisk-release.zip'
 boot_timeout=600
 emu_pid=
 
@@ -17,12 +17,12 @@ export ANDROID_SDK_HOME=$ANDROID_SDK_ROOT
 # API 26: legacy rootfs with Treble
 # API 28: legacy system-as-root
 # API 29: 2 Stage Init
-# API 34: latest Android
+# API 35: latest Android
 
-api_list='23 26 28 29 34'
+api_list='23 26 28 29 35'
 
 atd_min_api=30
-atd_max_api=34
+atd_max_api=35
 lsposed_min_api=27
 huge_ram_min_api=26
 
